@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="pt-PT" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Host | Hospedagem, Domínios & Serviços IT</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            900: '#0c4a6e',
+                            dark: '#030712',
+                            panel: '#0B1528',
+                            card: '#111C33',
+                            accent: '#06B6D4'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #030712;
+            color: #f8fafc;
+        }
+        .glow-cyan {
+            box-shadow: 0 0 35px -5px rgba(6, 182, 212, 0.3);
+        }
+        .glass-panel {
+            background: rgba(17, 28, 51, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .active-nav {
+            color: #22d3ee !important;
+            border-bottom: 2px solid #22d3ee;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-cyan-500 selection:text-slate-950">
+
+    <!-- HEADER / NAVEGAÇÃO -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo Digital Host -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('home')">
+                    <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 flex items-center justify-center text-white text-2xl font-black shadow-lg shadow-cyan-500/30">
+                        <i class="fa-solid fa-server"></i>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-extrabold tracking-tight text-white block leading-none">DIGITAL<span class="text-cyan-400">HOST</span></span>
+                        <span class="text-[10px] text-slate-400 font-semibold tracking-widest uppercase">Cloud & Datacenter Solutions</span>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <nav class="hidden md:flex space-x-1 lg:space-x-4">
+                    <button onclick="switchTab('home')" id="tab-btn-home" class="nav-tab-btn px-3 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors active-nav">Início</button>
+                    <button onclick="switchTab('hosting')" id="tab-btn-hosting" class="nav-tab-btn px-3 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors">Hospedagem</button>
+                    <button onclick="switchTab('domains')" id="tab-btn-domains" class="nav-tab-btn px-3 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors">Domínio & Email</button>
+                    <button onclick="switchTab('hardware')" id="tab-btn-hardware" class="nav-tab-btn px-3 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors">Manutenção IT</button>
+                    <button onclick="switchTab('team')" id="tab-btn-team" class="nav-tab-btn px-3 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors">Equipa</button>
+                    <button onclick="switchTab('contact')" id="tab-btn-contact" class="nav-tab-btn px-3 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors">Contactos</button>
+                </nav>
+
+                <!-- Action Button -->
+                <div class="hidden sm:flex items-center gap-3">
+                    <button onclick="switchTab('contact')" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-sm transition-all shadow-lg shadow-cyan-500/20 flex items-center gap-2">
+                        <i class="fa-solid fa-headset"></i> Suporte 24/7
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Toggle -->
+                <div class="md:hidden">
+                    <button onclick="toggleMenu()" class="text-slate-300 hover:text-white p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-drawer" class="hidden md:hidden glass-panel border-b border-slate-800 px-4 pt-2 pb-4 space-y-2">
+            <button onclick="switchTab('home'); toggleMenu()" class="block w-full text-left py-2.5 px-3 text-slate-200 hover:bg-slate-800/60 rounded-lg">Início</button>
+            <button onclick="switchTab('hosting'); toggleMenu()" class="block w-full text-left py-2.5 px-3 text-slate-200 hover:bg-slate-800/60 rounded-lg">Hospedagem</button>
+            <button onclick="switchTab('domains'); toggleMenu()" class="block w-full text-left py-2.5 px-3 text-slate-200 hover:bg-slate-800/60 rounded-lg">Domínio & Email</button>
+            <button onclick="switchTab('hardware'); toggleMenu()" class="block w-full text-left py-2.5 px-3 text-slate-200 hover:bg-slate-800/60 rounded-lg">Manutenção IT</button>
+            <button onclick="switchTab('team'); toggleMenu()" class="block w-full text-left py-2.5 px-3 text-slate-200 hover:bg-slate-800/60 rounded-lg">Equipa</button>
+            <button onclick="switchTab('contact'); toggleMenu()" class="block w-full text-left py-2.5 px-3 text-slate-200 hover:bg-slate-800/60 rounded-lg">Contactos</button>
+        </div>
+    </header>
+
+    <!-- MAIN SPA CONTENTS -->
+    <main class="flex-grow">
+
+        <!-- ================= SEÇÃO 1: HERO / INÍCIO ================= -->
+        <section id="view-home" class="tab-view block">
+            <!-- Hero Banner with Racks Background Image -->
+            <div class="relative overflow-hidden bg-slate-950 py-24 lg:py-32 border-b border-slate-800/80">
+                <!-- Rack Image Overlay Background -->
+                <div class="absolute inset-0 z-0 opacity-40">
+                    <img src="Racks Digitais.jpg" 
+                         alt="Digital Host Racks Servidores" 
+                         class="w-full h-full object-cover"
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1600&auto=format&fit=crop';" />
+                    <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/85 to-transparent"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
+                </div>
+
+                <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid lg:grid-cols-12 gap-12 items-center">
+                        <div class="lg:col-span-7 space-y-6">
+                            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/90 border border-cyan-500/40 text-cyan-400 text-xs font-semibold tracking-wide uppercase">
+                                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                                Infraestrutura NVMe Datacenter Portugal
+                            </div>
+                            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
+                                Hospedagem de Alta Performance & <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400">E-mail Profissional</span>
+                            </h1>
+                            <p class="text-base sm:text-lg text-slate-300 max-w-2xl font-light leading-relaxed">
+                                Na <strong>Digital Host</strong> garantimos velocidade máxima, segurança reforçada e apoio técnico especializado para a presença digital da sua empresa.
+                            </p>
+
+                            <!-- Domain Search Bar Widget -->
+                            <div class="pt-2">
+                                <form onsubmit="searchDomain(event)" class="glass-panel p-2 rounded-2xl flex flex-col sm:flex-row gap-2 max-w-2xl border border-slate-700/80 shadow-2xl">
+                                    <div class="relative flex-grow flex items-center">
+                                        <i class="fa-solid fa-magnifying-glass text-cyan-400 pl-4 pr-2"></i>
+                                        <input type="text" id="domain-search-input" placeholder="Pesquise o seu domínio (.pt, .com, .net)..." required class="w-full bg-transparent text-white placeholder-slate-400 text-sm focus:outline-none py-3 px-2">
+                                    </div>
+                                    <button type="submit" class="px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-extrabold text-sm rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/20">
+                                        Verificar Disponibilidade
+                                    </button>
+                                </form>
+                                <div id="domain-search-output" class="mt-3 text-sm font-medium hidden"></div>
+                                <div class="mt-3 flex flex-wrap items-center gap-4 text-xs text-slate-400 pl-2">
+                                    <span><strong class="text-white">.pt</strong> €8.90/ano</span>
+                                    <span><strong class="text-white">.com</strong> €11.50/ano</span>
+                                    <span><strong class="text-white">.net</strong> €12.90/ano</span>
+                                    <span><strong class="text-white">.eu</strong> €6.90/ano</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Data Center Interactive Card -->
+                        <div class="lg:col-span-5">
+                            <div class="glass-panel p-6 rounded-3xl border border-slate-700/80 glow-cyan space-y-6">
+                                <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
+                                        <span class="text-sm font-semibold text-slate-200">Digital Host Datacenter</span>
+                                    </div>
+                                    <span class="text-xs bg-emerald-950 text-emerald-400 border border-emerald-800/50 px-3 py-1 rounded-full font-mono">99.99% UPTIME</span>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-4 text-center">
+                                    <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800">
+                                        <div class="text-2xl font-bold text-cyan-400">< 10ms</div>
+                                        <div class="text-xs text-slate-400 mt-1">Latência Nacional</div>
+                                    </div>
+                                    <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800">
+                                        <div class="text-2xl font-bold text-blue-400">10 Gbps</div>
+                                        <div class="text-xs text-slate-400 mt-1">Conectividade Redundante</div>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-3">
+                                    <div class="flex items-center text-xs text-slate-300 gap-3">
+                                        <i class="fa-solid fa-shield-halved text-cyan-400 text-lg"></i>
+                                        <span>Proteção Anti-DDoS de Camada Enterprise</span>
+                                    </div>
+                                    <div class="flex items-center text-xs text-slate-300 gap-3">
+                                        <i class="fa-solid fa-microchip text-cyan-400 text-lg"></i>
+                                        <span>Servidores com discos NVMe ultra-rápidos</span>
+                                    </div>
+                                    <div class="flex items-center text-xs text-slate-300 gap-3">
+                                        <i class="fa-solid fa-wrench text-cyan-400 text-lg"></i>
+                                        <span>Apoio Técnico Presencial e Remoto em Portugal</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Quick Overview -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-xs font-bold uppercase tracking-wider text-cyan-400">Soluções Corporativas</span>
+                    <h2 class="text-3xl font-extrabold text-white mt-1">Serviços Especializados Digital Host</h2>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Service 1 -->
+                    <div class="glass-panel p-8 rounded-2xl border border-slate-800 hover:border-cyan-500/50 transition-all group">
+                        <div class="w-14 h-14 rounded-xl bg-cyan-950 border border-cyan-800 flex items-center justify-center text-cyan-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-cloud"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Hospedagem Web & Cloud</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                            Hospede o seu site com velocidade máxima SSD NVMe, cPanel, certificados SSL ilimitados e backups diários automáticos.
+                        </p>
+                        <button onclick="switchTab('hosting')" class="text-cyan-400 font-semibold text-sm hover:text-cyan-300 flex items-center gap-2">
+                            Ver Planos <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="glass-panel p-8 rounded-2xl border border-slate-800 hover:border-cyan-500/50 transition-all group">
+                        <div class="w-14 h-14 rounded-xl bg-cyan-950 border border-cyan-800 flex items-center justify-center text-cyan-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-envelope-shield"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Servidor de Email do Domínio</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                            Emails corporativos protegidos com a extensão do seu próprio domínio (@suaempresa.pt), antivírus e filtros Anti-Spam avançados.
+                        </p>
+                        <button onclick="switchTab('domains')" class="text-cyan-400 font-semibold text-sm hover:text-cyan-300 flex items-center gap-2">
+                            Ver Domínios & Email <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="glass-panel p-8 rounded-2xl border border-slate-800 hover:border-cyan-500/50 transition-all group">
+                        <div class="w-14 h-14 rounded-xl bg-cyan-950 border border-cyan-800 flex items-center justify-center text-cyan-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Manutenção & Reparação IT</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                            Laboratório profissional para reparação de portáteis, computadores, montagem de racks e manutenção de infraestruturas.
+                        </p>
+                        <button onclick="switchTab('hardware')" class="text-cyan-400 font-semibold text-sm hover:text-cyan-300 flex items-center gap-2">
+                            Serviços Técnicos <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SEÇÃO 2: PLANOS DE HOSPEDAGEM ================= -->
+        <section id="view-hosting" class="tab-view hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-xs font-bold uppercase tracking-wider text-cyan-400">Planos e Preços Transparentes</span>
+                    <h1 class="text-4xl font-black text-white mt-2">Hospedagem Web de Alta Velocidade</h1>
+                    <p class="text-slate-400 mt-4">Escolha a solução ideal para o seu projeto com infraestrutura alojada em datacenter nacional.</p>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-8 items-stretch">
+                    <!-- Plan 1: Básico -->
+                    <div class="glass-panel p-8 rounded-3xl border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all">
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-300">Plano Básico</h3>
+                            <p class="text-xs text-slate-400 mt-1">Ideal para sites pessoais e blogs</p>
+                            <div class="my-6">
+                                <span class="text-4xl font-black text-white">€4.90</span>
+                                <span class="text-slate-400 text-sm">/mês</span>
+                            </div>
+                            <ul class="space-y-4 text-sm text-slate-300 mb-8 border-t border-slate-800/80 pt-6">
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-cyan-400"></i> 10 GB Armazenamento SSD NVMe</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-cyan-400"></i> 5 Contas de Email Corporativas</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-cyan-400"></i> Certificado SSL Grátis (Let's Encrypt)</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-cyan-400"></i> Painel de Controlo cPanel</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-cyan-400"></i> Tráfego Mensal Ilimitado</li>
+                            </ul>
+                        </div>
+                        <button onclick="switchTab('contact')" class="w-full py-3 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-xl transition-colors">Subscrever Básico</button>
+                    </div>
+
+                    <!-- Plan 2: Profissional -->
+                    <div class="glass-panel p-8 rounded-3xl border-2 border-cyan-500 relative flex flex-col justify-between glow-cyan transform lg:-translate-y-2">
+                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-cyan-500 text-slate-950 px-4 py-1 rounded-full text-xs font-black uppercase tracking-wider">
+                            Mais Recomendado
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-cyan-400">Plano Profissional</h3>
+                            <p class="text-xs text-slate-400 mt-1">Perfeito para PMEs e Lojas Online</p>
+                            <div class="my-6">
+                                <span class="text-4xl font-black text-white">€9.90</span>
+                                <span class="text-slate-400 text-sm">/mês</span>
+                            </div>
+                            <ul class="space-y-4 text-sm text-slate-300 mb-8 border-t border-slate-800/80 pt-6">
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-cyan-400"></i> 50 GB Armazenamento SSD NVMe</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-cyan-400"></i> 25 Contas de Email Profissionais</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-cyan-400"></i> Domínio .pt GRÁTIS (subscrição anual)</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-cyan-400"></i> Backups Diários Automáticos</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-cyan-400"></i> Suporte Prioritário Telefónico & Ticket</li>
+                            </ul>
+                        </div>
+                        <button onclick="switchTab('contact')" class="w-full py-3 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-extrabold rounded-xl transition-colors shadow-lg shadow-cyan-500/25">Escolher Profissional</button>
+                    </div>
+
+                    <!-- Plan 3: Enterprise -->
+                    <div class="glass-panel p-8 rounded-3xl border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all">
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-300">Plano Enterprise</h3>
+                            <p class="text-xs text-slate-400 mt-1">Desempenho máximo para grandes empresas</p>
+                            <div class="my-6">
+                                <span class="text-4xl font-black text-white">€19.90</span>
+                                <span class="text-slate-400 text-sm">/mês</span>
+                            </div>
+                            <ul class="space-y-4 text-sm text-slate-300 mb-8 border-t border-slate-800/80 pt-6">
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-cyan-400"></i> 150 GB NVMe / Recursos Dedicados</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-cyan-400"></i> Contas de Email Ilimitadas</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-cyan-400"></i> IP Dedicado + Proteção DDoS Avançada</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-cyan-400"></i> SSL Wildcard & Migração Gratuita</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-cyan-400"></i> Gestor de Conta Dedicado 24/7</li>
+                            </ul>
+                        </div>
+                        <button onclick="switchTab('contact')" class="w-full py-3 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-xl transition-colors">Solicitar Solução Custom</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SEÇÃO 3: DOMÍNIOS & SERVIDOR DE EMAIL ================= -->
+        <section id="view-domains" class="tab-view hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-xs font-bold uppercase tracking-wider text-cyan-400">Identidade Digital</span>
+                    <h1 class="text-4xl font-black text-white mt-2">Registo de Domínios & Servidores de Email</h1>
+                    <p class="text-slate-400 mt-4">Garanta o nome da sua marca e comunique profissionalmente com o seu próprio endereço de email corporativo.</p>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
+                    <div class="space-y-6">
+                        <h2 class="text-2xl font-bold text-white">Emails Profissionais com o Nome da Sua Empresa</h2>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Transmita total confiança aos seus clientes com um endereço corporativo exclusivo (ex: <code class="text-cyan-400 bg-slate-900 px-2 py-1 rounded">contacto@suaempresa.pt</code>).
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-3">
+                                <div class="p-2.5 bg-cyan-950 text-cyan-400 rounded-xl border border-cyan-800"><i class="fa-solid fa-shield-virus"></i></div>
+                                <div>
+                                    <h4 class="text-white font-semibold text-sm">Filtros Antispam e Antivírus Integrados</h4>
+                                    <p class="text-slate-400 text-xs mt-1">Sistemas de proteção ativa para assegurar caixas de entrada limpas e seguras.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="p-2.5 bg-cyan-950 text-cyan-400 rounded-xl border border-cyan-800"><i class="fa-solid fa-laptop-code"></i></div>
+                                <div>
+                                    <h4 class="text-white font-semibold text-sm">Webmail Moderno & Sincronização Mobile</h4>
+                                    <p class="text-slate-400 text-xs mt-1">Aceda ao seu e-mail em qualquer lugar via IMAP/POP3 em iOS, Android e Outlook.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="p-2.5 bg-cyan-950 text-cyan-400 rounded-xl border border-cyan-800"><i class="fa-solid fa-key"></i></div>
+                                <div>
+                                    <h4 class="text-white font-semibold text-sm">Autenticação DKIM, SPF e DMARC</h4>
+                                    <p class="text-slate-400 text-xs mt-1">Garantia que as suas mensagens não vão parar à caixa de Spam dos seus clientes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel p-8 rounded-3xl border border-slate-800">
+                        <h3 class="text-xl font-bold text-white mb-6">Tabela de Preços de Domínios</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3.5 bg-slate-900/80 rounded-xl border border-slate-800">
+                                <span class="font-bold text-white">.PT <span class="text-xs text-slate-400 font-normal">(Domínio Nacional)</span></span>
+                                <span class="text-cyan-400 font-extrabold">€8.90 /ano</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3.5 bg-slate-900/80 rounded-xl border border-slate-800">
+                                <span class="font-bold text-white">.COM <span class="text-xs text-slate-400 font-normal">(Internacional)</span></span>
+                                <span class="text-cyan-400 font-extrabold">€11.50 /ano</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3.5 bg-slate-900/80 rounded-xl border border-slate-800">
+                                <span class="font-bold text-white">.EU <span class="text-xs text-slate-400 font-normal">(União Europeia)</span></span>
+                                <span class="text-cyan-400 font-extrabold">€6.90 /ano</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3.5 bg-slate-900/80 rounded-xl border border-slate-800">
+                                <span class="font-bold text-white">.NET / .ORG</span>
+                                <span class="text-cyan-400 font-extrabold">€12.90 /ano</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SEÇÃO 4: MANUTENÇÃO & SUPORTE TÉCNICO (COM AS IMAGENS DO PROJETO) ================= -->
+        <section id="view-hardware" class="tab-view hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-xs font-bold uppercase tracking-wider text-cyan-400">Serviços Técnicos Especializados</span>
+                    <h1 class="text-4xl font-black text-white mt-2">Manutenção de Hardware & Infraestruturas</h1>
+                    <p class="text-slate-400 mt-4">Laboratório com técnicos certificados para assistência a portáteis, computadores de secretária e instalação de servidores em rack.</p>
+                </div>
+
+                <!-- Showcase Grid using project image files -->
+                <div class="grid md:grid-cols-3 gap-8">
+                    
+                    <!-- Card 1: Tela Notebook -->
+                    <div class="glass-panel rounded-3xl overflow-hidden border border-slate-800 group hover:border-cyan-500/50 transition-all">
+                        <div class="h-60 overflow-hidden relative">
+                            <img src="Tela notebook.jpg" 
+                                 alt="Manutenção de Portáteis Digital Host" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?q=80&w=800&auto=format&fit=crop';" />
+                            <span class="absolute top-3 right-3 bg-cyan-500 text-slate-950 font-bold text-xs px-3 py-1 rounded-full">Portáteis</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-white mb-2">Substituição de Ecrãs & Cable Flat</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                                Reparação de portáteis com ecrãs partidos, substituição de cabos de sinal, teclados, dobradiças e recondicionamento geral.
+                            </p>
+                            <span class="text-xs font-semibold text-cyan-400 flex items-center gap-1.5"><i class="fa-solid fa-circle-check"></i> Peças Originais com Garantia</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Manutenção PC -->
+                    <div class="glass-panel rounded-3xl overflow-hidden border border-slate-800 group hover:border-cyan-500/50 transition-all">
+                        <div class="h-60 overflow-hidden relative">
+                            <img src="Manutençao PC.jpg" 
+                                 alt="Reparação de Computadores PC Digital Host" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?q=80&w=800&auto=format&fit=crop';" />
+                            <span class="absolute top-3 right-3 bg-blue-500 text-white font-bold text-xs px-3 py-1 rounded-full">Desktops & Gaming</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-white mb-2">Manutenção Preventiva & Componentes</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                                Limpeza técnica interna, troca de massa térmica, otimização de coolers, upgrades de memória RAM e SSD para alta performance.
+                            </p>
+                            <span class="text-xs font-semibold text-cyan-400 flex items-center gap-1.5"><i class="fa-solid fa-circle-check"></i> Testes de Temperatura & Estresse</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Work at Data Center Gemini Image -->
+                    <div class="glass-panel rounded-3xl overflow-hidden border border-slate-800 group hover:border-cyan-500/50 transition-all">
+                        <div class="h-60 overflow-hidden relative">
+                            <img src="Gemini_Generated_Image_jmt3ohjmt3ohjmt3.jpg" 
+                                 alt="Trabalho de Infraestrutura em Datacenter" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop';" />
+                            <span class="absolute top-3 right-3 bg-indigo-500 text-white font-bold text-xs px-3 py-1 rounded-full">Datacenter</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-white mb-2">Montagem e Calibração de Racks</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                                Intervenção técnica em bastidores, cablagem de fibra/Cat6, testes de continuidade com multímetros e diagnóstico de rede local.
+                            </p>
+                            <span class="text-xs font-semibold text-cyan-400 flex items-center gap-1.5"><i class="fa-solid fa-circle-check"></i> Suporte On-Site & Remoto</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SEÇÃO 5: NOSSA EQUIPA ================= -->
+        <section id="view-team" class="tab-view hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-xs font-bold uppercase tracking-wider text-cyan-400">Recursos Humanos</span>
+                    <h1 class="text-4xl font-black text-white mt-2">Conheça a Equipa Digital Host</h1>
+                    <p class="text-slate-400 mt-4">Especialistas comprometidos com a disponibilidade, segurança e otimização contínua da sua infraestrutura.</p>
+                </div>
+
+                <!-- Main Team Banner Image -->
+                <div class="relative rounded-3xl overflow-hidden mb-16 border border-slate-800 shadow-2xl">
+                    <img src="Gr Funcionárias.jpg" 
+                         alt="Equipa de Colaboradores Digital Host" 
+                         class="w-full h-96 object-cover"
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop';" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent flex items-end p-8">
+                        <div>
+                            <span class="bg-cyan-500 text-slate-950 text-xs font-bold px-3 py-1 rounded-full uppercase">Equipa Certificada</span>
+                            <h2 class="text-2xl font-bold text-white mt-2">Profissionais Qualificados ao Seu Serviço</h2>
+                            <p class="text-slate-300 text-sm max-w-2xl mt-1">Técnicos especializados em administração de sistemas Linux/Windows Server, eletrónica e engenharia de redes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SEÇÃO 6: CONTACTOS & FORMULÁRIO ================= -->
+        <section id="view-contact" class="tab-view hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-xs font-bold uppercase tracking-wider text-cyan-400">Suporte & Contacto</span>
+                    <h1 class="text-4xl font-black text-white mt-2">Entre em Contacto Connosco</h1>
+                    <p class="text-slate-400 mt-4">Estamos disponíveis para esclarecer dúvidas sobre alojamento, migração de domínios ou apoio técnico.</p>
+                </div>
+
+                <div class="grid lg:grid-cols-12 gap-12">
+                    <!-- Form -->
+                    <div class="lg:col-span-7 glass-panel p-8 rounded-3xl border border-slate-800">
+                        <form onsubmit="handleForm(event)" class="space-y-4">
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-300 mb-1">Nome Completo</label>
+                                    <input type="text" required placeholder="O seu nome" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-400">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-300 mb-1">Email</label>
+                                    <input type="email" required placeholder="seuemail@empresa.pt" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-400">
+                                </div>
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-300 mb-1">Telefone</label>
+                                    <input type="tel" placeholder="+351 910 000 000" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-400">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-300 mb-1">Serviço Pretendido</label>
+                                    <select class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-400">
+                                        <option>Hospedagem Web & Cloud</option>
+                                        <option>Registo de Domínios & Email</option>
+                                        <option>Manutenção de Portáteis / PCs</option>
+                                        <option>Apoio Técnico Geral</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1">Mensagem</label>
+                                <textarea rows="4" required placeholder="Descreva os detalhes do seu pedido..." class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-400"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-3.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-extrabold rounded-xl transition-all shadow-lg shadow-cyan-500/20 flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-paper-plane"></i> Enviar Pedido
+                            </button>
+                        </form>
+                        <div id="form-alert" class="mt-4 p-4 rounded-xl bg-emerald-950 border border-emerald-800 text-emerald-300 text-sm hidden">
+                            <i class="fa-solid fa-circle-check mr-2"></i> Mensagem enviada com sucesso para a equipa da Digital Host!
+                        </div>
+                    </div>
+
+                    <!-- Side Info -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <div class="glass-panel p-6 rounded-3xl border border-slate-800 space-y-4">
+                            <h4 class="text-white font-bold text-lg">Digital Host Portugal</h4>
+                            <div class="flex items-start gap-3 text-sm text-slate-300">
+                                <i class="fa-solid fa-location-dot text-cyan-400 mt-1"></i>
+                                <span>Centro Tecnológico de Braga<br>4700-000 Braga, Portugal</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-sm text-slate-300">
+                                <i class="fa-solid fa-envelope text-cyan-400"></i>
+                                <span class="text-cyan-400 font-mono">suporte@digitalhost.pt</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-sm text-slate-300">
+                                <i class="fa-solid fa-phone text-cyan-400"></i>
+                                <span>+351 253 100 200</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 border-t border-slate-800/80 py-12 text-slate-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-server text-cyan-400 text-xl"></i>
+                        <span class="text-white font-extrabold tracking-tight">DIGITAL<span class="text-cyan-400">HOST</span></span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Infraestrutura profissional de hospedagem web, servidores de email do domínio e laboratório de manutenção técnica em Portugal.
+                    </p>
+                </div>
+
+                <div>
+                    <h5 class="text-white font-semibold text-xs uppercase tracking-wider mb-4">Navegação</h5>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#" onclick="switchTab('hosting')" class="hover:text-cyan-400">Hospedagem Web</a></li>
+                        <li><a href="#" onclick="switchTab('domains')" class="hover:text-cyan-400">Registo de Domínios</a></li>
+                        <li><a href="#" onclick="switchTab('hardware')" class="hover:text-cyan-400">Manutenção de Portáteis</a></li>
+                        <li><a href="#" onclick="switchTab('team')" class="hover:text-cyan-400">Nossa Equipa</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="text-white font-semibold text-xs uppercase tracking-wider mb-4">Tecnologias</h5>
+                    <ul class="space-y-2 text-xs">
+                        <li>Servidores NVMe SSD</li>
+                        <li>Painel cPanel / DirectAdmin</li>
+                        <li>Proteção Anti-DDoS Corporativa</li>
+                        <li>Garantia 99.99% Uptime</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="text-white font-semibold text-xs uppercase tracking-wider mb-4">Alojamento</h5>
+                    <p class="text-xs text-slate-500 mb-3">Pronto para hospedagem estática direta e otimizada no GitHub Pages.</p>
+                    <div class="flex gap-3 text-slate-400 text-lg">
+                        <i class="fa-brands fa-github text-white"></i>
+                        <i class="fa-brands fa-linux"></i>
+                        <i class="fa-solid fa-shield-halved text-cyan-400"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-900 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
+                <p>&copy; <span id="year"></span> Digital Host. Todos os direitos reservados.</p>
+                <p>Publicado via GitHub Pages</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT -->
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Single Page Application Navigation
+        function switchTab(tabId) {
+            const views = document.querySelectorAll('.tab-view');
+            views.forEach(v => {
+                v.classList.add('hidden');
+                v.classList.remove('block');
+            });
+
+            const activeView = document.getElementById('view-' + tabId);
+            if (activeView) {
+                activeView.classList.remove('hidden');
+                activeView.classList.add('block');
+            }
+
+            const buttons = document.querySelectorAll('.nav-tab-btn');
+            buttons.forEach(b => b.classList.remove('active-nav'));
+
+            const activeButton = document.getElementById('tab-btn-' + tabId);
+            if (activeButton) {
+                activeButton.classList.add('active-nav');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMenu() {
+            document.getElementById('mobile-drawer').classList.toggle('hidden');
+        }
+
+        // Domain Search Simulation
+        function searchDomain(e) {
+            e.preventDefault();
+            const query = document.getElementById('domain-search-input').value.trim();
+            const output = document.getElementById('domain-search-output');
+            if (!query) return;
+
+            output.classList.remove('hidden');
+            output.className = "mt-3 text-sm p-3 rounded-xl border bg-slate-900 border-cyan-500/50 text-cyan-300";
+            output.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i>A verificar disponibilidade de <strong>${query}</strong>...`;
+
+            setTimeout(() => {
+                output.className = "mt-3 text-sm p-3 rounded-xl border bg-emerald-950/80 border-emerald-700 text-emerald-300 flex items-center justify-between";
+                output.innerHTML = `
+                    <span><i class="fa-solid fa-circle-check mr-2"></i> O domínio <strong>${query}</strong> está disponível para registo imediato!</span>
+                    <button onclick="switchTab('contact')" class="px-3 py-1 bg-emerald-500 text-slate-950 font-bold text-xs rounded-lg hover:bg-emerald-400">Registar</button>
+                `;
+            }, 700);
+        }
+
+        // Form Submit
+        function handleForm(e) {
+            e.preventDefault();
+            document.getElementById('form-alert').classList.remove('hidden');
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>
