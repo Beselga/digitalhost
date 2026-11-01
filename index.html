@@ -41,29 +41,22 @@
             background-color: #030712;
             color: #f8fafc;
         }
-        .glow-cyan {
-            box-shadow: 0 0 35px -5px rgba(6, 182, 212, 0.3);
-        }
         .glass-panel {
             background: rgba(17, 28, 51, 0.75);
             backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
-        .active-nav {
-            color: #22d3ee !important;
-            border-bottom: 2px solid #22d3ee;
-        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between antialiased selection:bg-cyan-500 selection:text-slate-950">
 
-    <!-- HEADER / NAVEGAÇÃO -->
+    <!-- HEADER / NAVEGAÇÃO POR ÂNCORAS -->
     <header class="sticky top-0 z-50 glass-panel border-b border-slate-800/80">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 
                 <!-- Logo Digital Host -->
-                <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('home')">
+                <a href="#home" class="flex items-center gap-3 cursor-pointer">
                     <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 flex items-center justify-center text-white text-2xl font-black shadow-lg shadow-cyan-500/30">
                         <i class="fa-solid fa-server"></i>
                     </div>
@@ -71,23 +64,23 @@
                         <span class="text-2xl font-extrabold tracking-tight text-white block leading-none">DIGITAL<span class="text-cyan-400">HOST</span></span>
                         <span class="text-[10px] text-slate-400 font-semibold tracking-widest uppercase">Cloud & Datacenter Solutions</span>
                     </div>
-                </div>
+                </a>
 
                 <!-- Navigation Links -->
                 <nav class="hidden md:flex space-x-1 lg:space-x-4">
-                    <button onclick="switchTab('home')" id="tab-btn-home" class="nav-tab-btn px-3 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors active-nav">Início</button>
-                    <button onclick="switchTab('hosting')" id="tab-btn-hosting" class="nav-tab-btn px-3 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors">Hospedagem</button>
-                    <button onclick="switchTab('domains')" id="tab-btn-domains" class="nav-tab-btn px-3 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors">Domínio & Email</button>
-                    <button onclick="switchTab('hardware')" id="tab-btn-hardware" class="nav-tab-btn px-3 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors">Manutenção IT</button>
-                    <button onclick="switchTab('team')" id="tab-btn-team" class="nav-tab-btn px-3 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors">Equipa</button>
-                    <button onclick="switchTab('contact')" id="tab-btn-contact" class="nav-tab-btn px-3 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors">Contactos</button>
+                    <a href="#home" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors">Início</a>
+                    <a href="#hosting" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors">Hospedagem</a>
+                    <a href="#domains" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors">Domínio & Email</a>
+                    <a href="#hardware" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors">Manutenção IT</a>
+                    <a href="#team" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors">Equipa</a>
+                    <a href="#contact" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors">Contactos</a>
                 </nav>
 
                 <!-- Action Button -->
                 <div class="hidden sm:flex items-center gap-3">
-                    <button onclick="switchTab('contact')" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-sm transition-all shadow-lg shadow-cyan-500/20 flex items-center gap-2">
+                    <a href="#contact" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-sm transition-all shadow-lg shadow-cyan-500/20 flex items-center gap-2">
                         <i class="fa-solid fa-headset"></i> Suporte 24/7
-                    </button>
+                    </a>
                 </div>
 
                 <!-- Mobile Menu Toggle -->
@@ -101,176 +94,121 @@
 
         <!-- Mobile Navigation Drawer -->
         <div id="mobile-drawer" class="hidden md:hidden glass-panel border-b border-slate-800 px-4 pt-2 pb-4 space-y-2">
-            <button onclick="switchTab('home'); toggleMenu()" class="block w-full text-left py-2.5 px-3 text-slate-200 hover:bg-slate-800/60 rounded-lg">Início</button>
-            <button onclick="switchTab('hosting'); toggleMenu()" class="block w-full text-left py-2.5 px-3 text-slate-200 hover:bg-slate-800/60 rounded-lg">Hospedagem</button>
-            <button onclick="switchTab('domains'); toggleMenu()" class="block w-full text-left py-2.5 px-3 text-slate-200 hover:bg-slate-800/60 rounded-lg">Domínio & Email</button>
-            <button onclick="switchTab('hardware'); toggleMenu()" class="block w-full text-left py-2.5 px-3 text-slate-200 hover:bg-slate-800/60 rounded-lg">Manutenção IT</button>
-            <button onclick="switchTab('team'); toggleMenu()" class="block w-full text-left py-2.5 px-3 text-slate-200 hover:bg-slate-800/60 rounded-lg">Equipa</button>
-            <button onclick="switchTab('contact'); toggleMenu()" class="block w-full text-left py-2.5 px-3 text-slate-200 hover:bg-slate-800/60 rounded-lg">Contactos</button>
+            <a href="#home" onclick="toggleMenu()" class="block w-full text-left py-2.5 px-3 text-slate-200 hover:bg-slate-800/60 rounded-lg">Início</a>
+            <a href="#hosting" onclick="toggleMenu()" class="block w-full text-left py-2.5 px-3 text-slate-200 hover:bg-slate-800/60 rounded-lg">Hospedagem</a>
+            <a href="#domains" onclick="toggleMenu()" class="block w-full text-left py-2.5 px-3 text-slate-200 hover:bg-slate-800/60 rounded-lg">Domínio & Email</a>
+            <a href="#hardware" onclick="toggleMenu()" class="block w-full text-left py-2.5 px-3 text-slate-200 hover:bg-slate-800/60 rounded-lg">Manutenção IT</a>
+            <a href="#team" onclick="toggleMenu()" class="block w-full text-left py-2.5 px-3 text-slate-200 hover:bg-slate-800/60 rounded-lg">Equipa</a>
+            <a href="#contact" onclick="toggleMenu()" class="block w-full text-left py-2.5 px-3 text-slate-200 hover:bg-slate-800/60 rounded-lg">Contactos</a>
         </div>
     </header>
 
-    <!-- MAIN SPA CONTENTS -->
+    <!-- MAIN CONTINUOUS LANDSCAPE CONTENT -->
     <main class="flex-grow">
 
         <!-- ================= SEÇÃO 1: HERO / INÍCIO ================= -->
-        <section id="view-home" class="tab-view block">
-            <!-- Hero Banner with Racks Background Image -->
-            <div class="relative overflow-hidden bg-slate-950 py-24 lg:py-32 border-b border-slate-800/80">
-                <!-- Rack Image Overlay Background -->
-                <div class="absolute inset-0 z-0 opacity-40">
-                    <img src="Racks Digitais.jpg" 
-                         alt="Digital Host Racks Servidores" 
-                         class="w-full h-full object-cover"
-                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1600&auto=format&fit=crop';" />
-                    <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/85 to-transparent"></div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
-                </div>
-
-                <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="grid lg:grid-cols-12 gap-12 items-center">
-                        <div class="lg:col-span-7 space-y-6">
-                            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/90 border border-cyan-500/40 text-cyan-400 text-xs font-semibold tracking-wide uppercase">
-                                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
-                                Infraestrutura NVMe Datacenter Portugal
-                            </div>
-                            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
-                                Hospedagem de Alta Performance & <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400">E-mail Profissional</span>
-                            </h1>
-                            <p class="text-base sm:text-lg text-slate-300 max-w-2xl font-light leading-relaxed">
-                                Na <strong>Digital Host</strong> garantimos velocidade máxima, segurança reforçada e apoio técnico especializado para a presença digital da sua empresa.
-                            </p>
-
-                            <!-- Domain Search Bar Widget -->
-                            <div class="pt-2">
-                                <form onsubmit="searchDomain(event)" class="glass-panel p-2 rounded-2xl flex flex-col sm:flex-row gap-2 max-w-2xl border border-slate-700/80 shadow-2xl">
-                                    <div class="relative flex-grow flex items-center">
-                                        <i class="fa-solid fa-magnifying-glass text-cyan-400 pl-4 pr-2"></i>
-                                        <input type="text" id="domain-search-input" placeholder="Pesquise o seu domínio (.pt, .com, .net)..." required class="w-full bg-transparent text-white placeholder-slate-400 text-sm focus:outline-none py-3 px-2">
-                                    </div>
-                                    <button type="submit" class="px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-extrabold text-sm rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/20">
-                                        Verificar Disponibilidade
-                                    </button>
-                                </form>
-                                <div id="domain-search-output" class="mt-3 text-sm font-medium hidden"></div>
-                                <div class="mt-3 flex flex-wrap items-center gap-4 text-xs text-slate-400 pl-2">
-                                    <span><strong class="text-white">.pt</strong> €8.90/ano</span>
-                                    <span><strong class="text-white">.com</strong> €11.50/ano</span>
-                                    <span><strong class="text-white">.net</strong> €12.90/ano</span>
-                                    <span><strong class="text-white">.eu</strong> €6.90/ano</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Data Center Interactive Card -->
-                        <div class="lg:col-span-5">
-                            <div class="glass-panel p-6 rounded-3xl border border-slate-700/80 glow-cyan space-y-6">
-                                <div class="flex items-center justify-between border-b border-slate-800 pb-4">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
-                                        <span class="text-sm font-semibold text-slate-200">Digital Host Datacenter</span>
-                                    </div>
-                                    <span class="text-xs bg-emerald-950 text-emerald-400 border border-emerald-800/50 px-3 py-1 rounded-full font-mono">99.99% UPTIME</span>
-                                </div>
-
-                                <div class="grid grid-cols-2 gap-4 text-center">
-                                    <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800">
-                                        <div class="text-2xl font-bold text-cyan-400">< 10ms</div>
-                                        <div class="text-xs text-slate-400 mt-1">Latência Nacional</div>
-                                    </div>
-                                    <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800">
-                                        <div class="text-2xl font-bold text-blue-400">10 Gbps</div>
-                                        <div class="text-xs text-slate-400 mt-1">Conectividade Redundante</div>
-                                    </div>
-                                </div>
-
-                                <div class="space-y-3">
-                                    <div class="flex items-center text-xs text-slate-300 gap-3">
-                                        <i class="fa-solid fa-shield-halved text-cyan-400 text-lg"></i>
-                                        <span>Proteção Anti-DDoS de Camada Enterprise</span>
-                                    </div>
-                                    <div class="flex items-center text-xs text-slate-300 gap-3">
-                                        <i class="fa-solid fa-microchip text-cyan-400 text-lg"></i>
-                                        <span>Servidores com discos NVMe ultra-rápidos</span>
-                                    </div>
-                                    <div class="flex items-center text-xs text-slate-300 gap-3">
-                                        <i class="fa-solid fa-wrench text-cyan-400 text-lg"></i>
-                                        <span>Apoio Técnico Presencial e Remoto em Portugal</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <section id="home" class="relative overflow-hidden bg-slate-950 py-24 lg:py-32 border-b border-slate-800/80">
+            <!-- Rack Image Overlay Background -->
+            <div class="absolute inset-0 z-0 opacity-40">
+                <img src="Racks Digitais.jpg" 
+                     alt="Digital Host Racks Servidores" 
+                     class="w-full h-full object-cover"
+                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1600&auto=format&fit=crop';" />
+                <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/85 to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
             </div>
 
-            <!-- Features Quick Overview -->
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-                <div class="text-center max-w-3xl mx-auto mb-16">
-                    <span class="text-xs font-bold uppercase tracking-wider text-cyan-400">Soluções Corporativas</span>
-                    <h2 class="text-3xl font-extrabold text-white mt-1">Serviços Especializados Digital Host</h2>
-                </div>
-
-                <div class="grid md:grid-cols-3 gap-8">
-                    <!-- Service 1 -->
-                    <div class="glass-panel p-8 rounded-2xl border border-slate-800 hover:border-cyan-500/50 transition-all group">
-                        <div class="w-14 h-14 rounded-xl bg-cyan-950 border border-cyan-800 flex items-center justify-center text-cyan-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-cloud"></i>
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/90 border border-cyan-500/40 text-cyan-400 text-xs font-semibold tracking-wide uppercase">
+                            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                            Infraestrutura NVMe Datacenter Portugal
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-3">Hospedagem Web & Cloud</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-4">
-                            Hospede o seu site com velocidade máxima SSD NVMe, cPanel, certificados SSL ilimitados e backups diários automáticos.
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
+                            Hospedagem de Alta Performance & <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400">E-mail Profissional</span>
+                        </h1>
+                        <p class="text-base sm:text-lg text-slate-300 max-w-2xl font-light leading-relaxed">
+                            Na <strong>Digital Host</strong> garantimos velocidade máxima, segurança reforçada e apoio técnico especializado para a presença digital da sua empresa.
                         </p>
-                        <button onclick="switchTab('hosting')" class="text-cyan-400 font-semibold text-sm hover:text-cyan-300 flex items-center gap-2">
-                            Ver Planos <i class="fa-solid fa-arrow-right text-xs"></i>
-                        </button>
+
+                        <!-- Domain Search Bar Widget -->
+                        <div class="pt-2">
+                            <form onsubmit="searchDomain(event)" class="glass-panel p-2 rounded-2xl flex flex-col sm:flex-row gap-2 max-w-2xl border border-slate-700/80 shadow-2xl">
+                                <div class="relative flex-grow flex items-center">
+                                    <i class="fa-solid fa-magnifying-glass text-cyan-400 pl-4 pr-2"></i>
+                                    <input type="text" id="domain-search-input" placeholder="Pesquise o seu domínio (.pt, .com, .net)..." required class="w-full bg-transparent text-white placeholder-slate-400 text-sm focus:outline-none py-3 px-2">
+                                </div>
+                                <button type="submit" class="px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-extrabold text-sm rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/20">
+                                    Verificar Disponibilidade
+                                </button>
+                            </form>
+                            <div id="domain-search-output" class="mt-3 text-sm font-medium hidden"></div>
+                            <div class="mt-3 flex flex-wrap items-center gap-4 text-xs text-slate-400 pl-2">
+                                <span><strong class="text-white">.pt</strong> €8.90/ano</span>
+                                <span><strong class="text-white">.com</strong> €11.50/ano</span>
+                                <span><strong class="text-white">.net</strong> €12.90/ano</span>
+                                <span><strong class="text-white">.eu</strong> €6.90/ano</span>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Service 2 -->
-                    <div class="glass-panel p-8 rounded-2xl border border-slate-800 hover:border-cyan-500/50 transition-all group">
-                        <div class="w-14 h-14 rounded-xl bg-cyan-950 border border-cyan-800 flex items-center justify-center text-cyan-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-envelope-shield"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-3">Servidor de Email do Domínio</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-4">
-                            Emails corporativos protegidos com a extensão do seu próprio domínio (@suaempresa.pt), antivírus e filtros Anti-Spam avançados.
-                        </p>
-                        <button onclick="switchTab('domains')" class="text-cyan-400 font-semibold text-sm hover:text-cyan-300 flex items-center gap-2">
-                            Ver Domínios & Email <i class="fa-solid fa-arrow-right text-xs"></i>
-                        </button>
-                    </div>
+                    <!-- Data Center Interactive Card -->
+                    <div class="lg:col-span-5">
+                        <div class="glass-panel p-6 rounded-3xl border border-slate-700/80 space-y-6">
+                            <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
+                                    <span class="text-sm font-semibold text-slate-200">Digital Host Datacenter</span>
+                                </div>
+                                <span class="text-xs bg-emerald-950 text-emerald-400 border border-emerald-800/50 px-3 py-1 rounded-full font-mono">99.99% UPTIME</span>
+                            </div>
 
-                    <!-- Service 3 -->
-                    <div class="glass-panel p-8 rounded-2xl border border-slate-800 hover:border-cyan-500/50 transition-all group">
-                        <div class="w-14 h-14 rounded-xl bg-cyan-950 border border-cyan-800 flex items-center justify-center text-cyan-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                            <div class="grid grid-cols-2 gap-4 text-center">
+                                <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800">
+                                    <div class="text-2xl font-bold text-cyan-400">&lt; 10ms</div>
+                                    <div class="text-xs text-slate-400 mt-1">Latência Nacional</div>
+                                </div>
+                                <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800">
+                                    <div class="text-2xl font-bold text-blue-400">10 Gbps</div>
+                                    <div class="text-xs text-slate-400 mt-1">Conectividade Redundante</div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-3">
+                                <div class="flex items-center text-xs text-slate-300 gap-3">
+                                    <i class="fa-solid fa-shield-halved text-cyan-400 text-lg"></i>
+                                    <span>Proteção Anti-DDoS de Camada Enterprise</span>
+                                </div>
+                                <div class="flex items-center text-xs text-slate-300 gap-3">
+                                    <i class="fa-solid fa-microchip text-cyan-400 text-lg"></i>
+                                    <span>Servidores com discos NVMe ultra-rápidos</span>
+                                </div>
+                                <div class="flex items-center text-xs text-slate-300 gap-3">
+                                    <i class="fa-solid fa-wrench text-cyan-400 text-lg"></i>
+                                    <span>Apoio Técnico Presencial e Remoto em Portugal</span>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-3">Manutenção & Reparação IT</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-4">
-                            Laboratório profissional para reparação de portáteis, computadores, montagem de racks e manutenção de infraestruturas.
-                        </p>
-                        <button onclick="switchTab('hardware')" class="text-cyan-400 font-semibold text-sm hover:text-cyan-300 flex items-center gap-2">
-                            Serviços Técnicos <i class="fa-solid fa-arrow-right text-xs"></i>
-                        </button>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- ================= SEÇÃO 2: PLANOS DE HOSPEDAGEM ================= -->
-        <section id="view-hosting" class="tab-view hidden">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <section id="hosting" class="py-24 border-b border-slate-800/80 bg-slate-950/60">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto mb-16">
                     <span class="text-xs font-bold uppercase tracking-wider text-cyan-400">Planos e Preços Transparentes</span>
-                    <h1 class="text-4xl font-black text-white mt-2">Hospedagem Web de Alta Velocidade</h1>
+                    <h2 class="text-4xl font-black text-white mt-2">Hospedagem Web de Alta Velocidade</h2>
                     <p class="text-slate-400 mt-4">Escolha a solução ideal para o seu projeto com infraestrutura alojada em datacenter nacional.</p>
                 </div>
 
                 <div class="grid lg:grid-cols-3 gap-8 items-stretch">
                     <!-- Plan 1: Básico -->
-                    <div class="glass-panel p-8 rounded-3xl border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all">
+                    <div class="glass-panel p-8 rounded-3xl border-2 border-slate-800 flex flex-col justify-between hover:border-cyan-500 hover:scale-[1.02] hover:shadow-[0_0_35px_-5px_rgba(6,182,212,0.3)] transition-all duration-300 group">
                         <div>
-                            <h3 class="text-lg font-bold text-slate-300">Plano Básico</h3>
+                            <h3 class="text-lg font-bold text-slate-300 group-hover:text-cyan-400 transition-colors">Plano Básico</h3>
                             <p class="text-xs text-slate-400 mt-1">Ideal para sites pessoais e blogs</p>
                             <div class="my-6">
                                 <span class="text-4xl font-black text-white">€4.90</span>
@@ -284,16 +222,16 @@
                                 <li class="flex items-center gap-3"><i class="fa-solid fa-check text-cyan-400"></i> Tráfego Mensal Ilimitado</li>
                             </ul>
                         </div>
-                        <button onclick="switchTab('contact')" class="w-full py-3 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-xl transition-colors">Subscrever Básico</button>
+                        <a href="#contact" class="block text-center w-full py-3 bg-slate-800 group-hover:bg-cyan-500 group-hover:text-slate-950 text-white font-bold rounded-xl transition-all shadow-md">Subscrever Básico</a>
                     </div>
 
                     <!-- Plan 2: Profissional -->
-                    <div class="glass-panel p-8 rounded-3xl border-2 border-cyan-500 relative flex flex-col justify-between glow-cyan transform lg:-translate-y-2">
-                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-cyan-500 text-slate-950 px-4 py-1 rounded-full text-xs font-black uppercase tracking-wider">
+                    <div class="glass-panel p-8 rounded-3xl border-2 border-slate-800 flex flex-col justify-between hover:border-cyan-500 hover:scale-[1.02] hover:shadow-[0_0_35px_-5px_rgba(6,182,212,0.3)] transition-all duration-300 relative group">
+                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-cyan-500 text-slate-950 px-4 py-1 rounded-full text-xs font-black uppercase tracking-wider shadow-lg">
                             Mais Recomendado
                         </div>
                         <div>
-                            <h3 class="text-lg font-bold text-cyan-400">Plano Profissional</h3>
+                            <h3 class="text-lg font-bold text-slate-300 group-hover:text-cyan-400 transition-colors">Plano Profissional</h3>
                             <p class="text-xs text-slate-400 mt-1">Perfeito para PMEs e Lojas Online</p>
                             <div class="my-6">
                                 <span class="text-4xl font-black text-white">€9.90</span>
@@ -307,13 +245,13 @@
                                 <li class="flex items-center gap-3"><i class="fa-solid fa-check text-cyan-400"></i> Suporte Prioritário Telefónico & Ticket</li>
                             </ul>
                         </div>
-                        <button onclick="switchTab('contact')" class="w-full py-3 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-extrabold rounded-xl transition-colors shadow-lg shadow-cyan-500/25">Escolher Profissional</button>
+                        <a href="#contact" class="block text-center w-full py-3 bg-slate-800 group-hover:bg-cyan-500 group-hover:text-slate-950 text-white font-bold rounded-xl transition-all shadow-md">Escolher Profissional</a>
                     </div>
 
                     <!-- Plan 3: Enterprise -->
-                    <div class="glass-panel p-8 rounded-3xl border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all">
+                    <div class="glass-panel p-8 rounded-3xl border-2 border-slate-800 flex flex-col justify-between hover:border-cyan-500 hover:scale-[1.02] hover:shadow-[0_0_35px_-5px_rgba(6,182,212,0.3)] transition-all duration-300 group">
                         <div>
-                            <h3 class="text-lg font-bold text-slate-300">Plano Enterprise</h3>
+                            <h3 class="text-lg font-bold text-slate-300 group-hover:text-cyan-400 transition-colors">Plano Enterprise</h3>
                             <p class="text-xs text-slate-400 mt-1">Desempenho máximo para grandes empresas</p>
                             <div class="my-6">
                                 <span class="text-4xl font-black text-white">€19.90</span>
@@ -327,24 +265,24 @@
                                 <li class="flex items-center gap-3"><i class="fa-solid fa-check text-cyan-400"></i> Gestor de Conta Dedicado 24/7</li>
                             </ul>
                         </div>
-                        <button onclick="switchTab('contact')" class="w-full py-3 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-xl transition-colors">Solicitar Solução Custom</button>
+                        <a href="#contact" class="block text-center w-full py-3 bg-slate-800 group-hover:bg-cyan-500 group-hover:text-slate-950 text-white font-bold rounded-xl transition-all shadow-md">Solicitar Solução Custom</a>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- ================= SEÇÃO 3: DOMÍNIOS & SERVIDOR DE EMAIL ================= -->
-        <section id="view-domains" class="tab-view hidden">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <section id="domains" class="py-24 border-b border-slate-800/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto mb-16">
                     <span class="text-xs font-bold uppercase tracking-wider text-cyan-400">Identidade Digital</span>
-                    <h1 class="text-4xl font-black text-white mt-2">Registo de Domínios & Servidores de Email</h1>
+                    <h2 class="text-4xl font-black text-white mt-2">Registo de Domínios & Servidores de Email</h2>
                     <p class="text-slate-400 mt-4">Garanta o nome da sua marca e comunique profissionalmente com o seu próprio endereço de email corporativo.</p>
                 </div>
 
-                <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
                     <div class="space-y-6">
-                        <h2 class="text-2xl font-bold text-white">Emails Profissionais com o Nome da Sua Empresa</h2>
+                        <h3 class="text-2xl font-bold text-white">Emails Profissionais com o Nome da Sua Empresa</h3>
                         <p class="text-slate-300 text-sm leading-relaxed">
                             Transmita total confiança aos seus clientes com um endereço corporativo exclusivo (ex: <code class="text-cyan-400 bg-slate-900 px-2 py-1 rounded">contacto@suaempresa.pt</code>).
                         </p>
@@ -398,16 +336,15 @@
             </div>
         </section>
 
-        <!-- ================= SEÇÃO 4: MANUTENÇÃO & SUPORTE TÉCNICO (COM AS IMAGENS DO PROJETO) ================= -->
-        <section id="view-hardware" class="tab-view hidden">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <!-- ================= SEÇÃO 4: MANUTENÇÃO & SUPORTE TÉCNICO ================= -->
+        <section id="hardware" class="py-24 border-b border-slate-800/80 bg-slate-950/60">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto mb-16">
                     <span class="text-xs font-bold uppercase tracking-wider text-cyan-400">Serviços Técnicos Especializados</span>
-                    <h1 class="text-4xl font-black text-white mt-2">Manutenção de Hardware & Infraestruturas</h1>
+                    <h2 class="text-4xl font-black text-white mt-2">Manutenção de Hardware & Infraestruturas</h2>
                     <p class="text-slate-400 mt-4">Laboratório com técnicos certificados para assistência a portáteis, computadores de secretária e instalação de servidores em rack.</p>
                 </div>
 
-                <!-- Showcase Grid using project image files -->
                 <div class="grid md:grid-cols-3 gap-8">
                     
                     <!-- Card 1: Tela Notebook -->
@@ -469,16 +406,15 @@
         </section>
 
         <!-- ================= SEÇÃO 5: NOSSA EQUIPA ================= -->
-        <section id="view-team" class="tab-view hidden">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <section id="team" class="py-24 border-b border-slate-800/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto mb-16">
                     <span class="text-xs font-bold uppercase tracking-wider text-cyan-400">Recursos Humanos</span>
-                    <h1 class="text-4xl font-black text-white mt-2">Conheça a Equipa Digital Host</h1>
+                    <h2 class="text-4xl font-black text-white mt-2">Conheça a Equipa Digital Host</h2>
                     <p class="text-slate-400 mt-4">Especialistas comprometidos com a disponibilidade, segurança e otimização contínua da sua infraestrutura.</p>
                 </div>
 
-                <!-- Main Team Banner Image -->
-                <div class="relative rounded-3xl overflow-hidden mb-16 border border-slate-800 shadow-2xl">
+                <div class="relative rounded-3xl overflow-hidden border border-slate-800 shadow-2xl">
                     <img src="Gr Funcionárias.jpg" 
                          alt="Equipa de Colaboradores Digital Host" 
                          class="w-full h-96 object-cover"
@@ -486,7 +422,7 @@
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent flex items-end p-8">
                         <div>
                             <span class="bg-cyan-500 text-slate-950 text-xs font-bold px-3 py-1 rounded-full uppercase">Equipa Certificada</span>
-                            <h2 class="text-2xl font-bold text-white mt-2">Profissionais Qualificados ao Seu Serviço</h2>
+                            <h3 class="text-2xl font-bold text-white mt-2">Profissionais Qualificados ao Seu Serviço</h3>
                             <p class="text-slate-300 text-sm max-w-2xl mt-1">Técnicos especializados em administração de sistemas Linux/Windows Server, eletrónica e engenharia de redes.</p>
                         </div>
                     </div>
@@ -494,38 +430,38 @@
             </div>
         </section>
 
-        <!-- ================= SEÇÃO 6: CONTACTOS & FORMULÁRIO ================= -->
-        <section id="view-contact" class="tab-view hidden">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <!-- ================= SEÇÃO 6: CONTACTOS & FORMULÁRIO (WHATSAPP) ================= -->
+        <section id="contact" class="py-24 bg-slate-950/60">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto mb-16">
                     <span class="text-xs font-bold uppercase tracking-wider text-cyan-400">Suporte & Contacto</span>
-                    <h1 class="text-4xl font-black text-white mt-2">Entre em Contacto Connosco</h1>
-                    <p class="text-slate-400 mt-4">Estamos disponíveis para esclarecer dúvidas sobre alojamento, migração de domínios ou apoio técnico.</p>
+                    <h2 class="text-4xl font-black text-white mt-2">Entre em Contacto Connosco</h2>
+                    <p class="text-slate-400 mt-4">Preencha o formulário abaixo para enviar diretamente a sua mensagem via WhatsApp para a nossa equipa.</p>
                 </div>
 
                 <div class="grid lg:grid-cols-12 gap-12">
-                    <!-- Form -->
+                    <!-- Form WhatsApp -->
                     <div class="lg:col-span-7 glass-panel p-8 rounded-3xl border border-slate-800">
-                        <form onsubmit="handleForm(event)" class="space-y-4">
+                        <form onsubmit="sendToWhatsApp(event)" class="space-y-4">
                             <div class="grid md:grid-cols-2 gap-4">
                                 <div>
                                     <label class="block text-xs font-semibold text-slate-300 mb-1">Nome Completo</label>
-                                    <input type="text" required placeholder="O seu nome" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-400">
+                                    <input type="text" id="wp-name" required placeholder="O seu nome" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-400">
                                 </div>
                                 <div>
                                     <label class="block text-xs font-semibold text-slate-300 mb-1">Email</label>
-                                    <input type="email" required placeholder="seuemail@empresa.pt" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-400">
+                                    <input type="email" id="wp-email" required placeholder="seuemail@empresa.pt" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-400">
                                 </div>
                             </div>
 
                             <div class="grid md:grid-cols-2 gap-4">
                                 <div>
-                                    <label class="block text-xs font-semibold text-slate-300 mb-1">Telefone</label>
-                                    <input type="tel" placeholder="+351 910 000 000" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-400">
+                                    <label class="block text-xs font-semibold text-slate-300 mb-1">Telefone / Telemóvel</label>
+                                    <input type="tel" id="wp-phone" placeholder="+351 910 000 000" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-400">
                                 </div>
                                 <div>
                                     <label class="block text-xs font-semibold text-slate-300 mb-1">Serviço Pretendido</label>
-                                    <select class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-400">
+                                    <select id="wp-service" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-400">
                                         <option>Hospedagem Web & Cloud</option>
                                         <option>Registo de Domínios & Email</option>
                                         <option>Manutenção de Portáteis / PCs</option>
@@ -536,25 +472,41 @@
 
                             <div>
                                 <label class="block text-xs font-semibold text-slate-300 mb-1">Mensagem</label>
-                                <textarea rows="4" required placeholder="Descreva os detalhes do seu pedido..." class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-400"></textarea>
+                                <textarea id="wp-message" rows="4" required placeholder="Descreva os detalhes do seu pedido..." class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-400"></textarea>
                             </div>
 
-                            <button type="submit" class="w-full py-3.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-extrabold rounded-xl transition-all shadow-lg shadow-cyan-500/20 flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-paper-plane"></i> Enviar Pedido
+                            <button type="submit" class="w-full py-3.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold rounded-xl transition-all shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-lg"></i> Enviar Mensagem via WhatsApp
                             </button>
                         </form>
-                        <div id="form-alert" class="mt-4 p-4 rounded-xl bg-emerald-950 border border-emerald-800 text-emerald-300 text-sm hidden">
-                            <i class="fa-solid fa-circle-check mr-2"></i> Mensagem enviada com sucesso para a equipa da Digital Host!
-                        </div>
                     </div>
 
                     <!-- Side Info -->
-                    <div class="lg:col-span-5 space-y-6">
+                    <div class="lg:col-span-5 flex flex-col justify-between">
                         <div class="glass-panel p-6 rounded-3xl border border-slate-800 space-y-4">
-                            <h4 class="text-white font-bold text-lg">Digital Host Portugal</h4>
+                            <h4 class="text-white font-bold text-lg">Digital Host Contact Portugal</h4>
                             <div class="flex items-start gap-3 text-sm text-slate-300">
                                 <i class="fa-solid fa-location-dot text-cyan-400 mt-1"></i>
-                                <span>Centro Tecnológico de Braga<br>4700-000 Braga, Portugal</span>
+                                <span>Braga, Portugal</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-sm text-slate-300">
+                                <i class="fa-solid fa-envelope text-cyan-400"></i>
+                                <span class="text-cyan-400 font-mono">contact@digitalhost.pt</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-sm text-slate-300">
+                                <i class="fa-solid fa-phone text-cyan-400"></i>
+                                <span>+351 922 234 836</span>
+                            </div>
+                        </div>
+                    
+                
+		    <!-- Side2 Info -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <div class="glass-panel p-6 rounded-3xl border border-slate-800 space-y-4">
+                            <h4 class="text-white font-bold text-lg">Digital Host Support Portugal</h4>
+                            <div class="flex items-start gap-3 text-sm text-slate-300">
+                                <i class="fa-solid fa-location-dot text-cyan-400 mt-1"></i>
+                                <span>Braga, Portugal</span>
                             </div>
                             <div class="flex items-center gap-3 text-sm text-slate-300">
                                 <i class="fa-solid fa-envelope text-cyan-400"></i>
@@ -562,11 +514,13 @@
                             </div>
                             <div class="flex items-center gap-3 text-sm text-slate-300">
                                 <i class="fa-solid fa-phone text-cyan-400"></i>
-                                <span>+351 253 100 200</span>
+                                <span>+351 922 234 836</span>
                             </div>
                         </div>
                     </div>
-                </div>
+                  </div>
+	
+		</div>
             </div>
         </section>
 
@@ -589,10 +543,10 @@
                 <div>
                     <h5 class="text-white font-semibold text-xs uppercase tracking-wider mb-4">Navegação</h5>
                     <ul class="space-y-2 text-xs">
-                        <li><a href="#" onclick="switchTab('hosting')" class="hover:text-cyan-400">Hospedagem Web</a></li>
-                        <li><a href="#" onclick="switchTab('domains')" class="hover:text-cyan-400">Registo de Domínios</a></li>
-                        <li><a href="#" onclick="switchTab('hardware')" class="hover:text-cyan-400">Manutenção de Portáteis</a></li>
-                        <li><a href="#" onclick="switchTab('team')" class="hover:text-cyan-400">Nossa Equipa</a></li>
+                        <li><a href="#hosting" class="hover:text-cyan-400">Hospedagem Web</a></li>
+                        <li><a href="#domains" class="hover:text-cyan-400">Registo de Domínios</a></li>
+                        <li><a href="#hardware" class="hover:text-cyan-400">Manutenção IT</a></li>
+                        <li><a href="#team" class="hover:text-cyan-400">Nossa Equipa</a></li>
                     </ul>
                 </div>
 
@@ -628,31 +582,6 @@
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Single Page Application Navigation
-        function switchTab(tabId) {
-            const views = document.querySelectorAll('.tab-view');
-            views.forEach(v => {
-                v.classList.add('hidden');
-                v.classList.remove('block');
-            });
-
-            const activeView = document.getElementById('view-' + tabId);
-            if (activeView) {
-                activeView.classList.remove('hidden');
-                activeView.classList.add('block');
-            }
-
-            const buttons = document.querySelectorAll('.nav-tab-btn');
-            buttons.forEach(b => b.classList.remove('active-nav'));
-
-            const activeButton = document.getElementById('tab-btn-' + tabId);
-            if (activeButton) {
-                activeButton.classList.add('active-nav');
-            }
-
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
         function toggleMenu() {
             document.getElementById('mobile-drawer').classList.toggle('hidden');
         }
@@ -672,16 +601,43 @@
                 output.className = "mt-3 text-sm p-3 rounded-xl border bg-emerald-950/80 border-emerald-700 text-emerald-300 flex items-center justify-between";
                 output.innerHTML = `
                     <span><i class="fa-solid fa-circle-check mr-2"></i> O domínio <strong>${query}</strong> está disponível para registo imediato!</span>
-                    <button onclick="switchTab('contact')" class="px-3 py-1 bg-emerald-500 text-slate-950 font-bold text-xs rounded-lg hover:bg-emerald-400">Registar</button>
+                    <a href="#contact" class="px-3 py-1 bg-emerald-500 text-slate-950 font-bold text-xs rounded-lg hover:bg-emerald-400">Registar</a>
                 `;
             }, 700);
         }
 
-        // Form Submit
-        function handleForm(e) {
+        // WhatsApp Form Handler (Com codificação perfeita e frase final de interesse)
+        function sendToWhatsApp(e) {
             e.preventDefault();
-            document.getElementById('form-alert').classList.remove('hidden');
-            e.target.reset();
+            
+            const name = document.getElementById('wp-name').value;
+            const email = document.getElementById('wp-email').value;
+            const phone = document.getElementById('wp-phone').value;
+            const service = document.getElementById('wp-service').value;
+            const message = document.getElementById('wp-message').value;
+
+            const whatsappNumber = "351922234836"; 
+
+            let interesseTexto = "Gostaria de obter mais informações sobre os vossos serviços de TI.";
+            if (service.includes("Hospedagem")) {
+                interesseTexto = "Tenho interesse em contratar o plano de Hospedagem Web.";
+            } else if (service.includes("Domínios")) {
+                interesseTexto = "Gostaria de proceder ao registo de Domínio e configuração de Email.";
+            } else if (service.includes("Manutenção")) {
+                interesseTexto = "Preciso de suporte técnico para Manutenção de Portáteis / PCs.";
+            }
+
+            const textoMensagem = 
+                `Novo Pedido via Site - Digital Host\n\n` +
+                `Nome: ${name}\n` +
+                `Email: ${email}\n` +
+                `Telemóvel: ${phone}\n` +
+                `Serviço: ${service}\n` +
+                `Mensagem: ${message}\n\n` +
+                `${interesseTexto}`;
+
+            const url = `https://wa.me/${whatsappNumber}?text=` + encodeURIComponent(textoMensagem);
+            window.open(url, '_blank');
         }
     </script>
 </body>
